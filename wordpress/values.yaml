@@ -83,3 +83,4 @@ database:
   port: 3306
   user: wordpress
   password: wordpress
+  db: wordpressdb

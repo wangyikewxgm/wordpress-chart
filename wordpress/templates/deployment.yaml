@@ -36,6 +36,8 @@ spec:
               value: {{ .Values.database.user | quote }}
             - name: WORDPRESS_DB_PASSWORD
               value: {{ .Values.database.password | quote }}
+            - name: WORDPRESS_DB_NAME
+              value: {{ .Values.database.db | quote }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
@@ -45,10 +47,6 @@ spec:
               containerPort: 80
               protocol: TCP
           livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
             httpGet:
               path: /
               port: http
